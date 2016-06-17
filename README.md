@@ -20,8 +20,37 @@ Or install it yourself as:
 
 ## Usage
 
+### Server
+
 ```ruby
 require 'alo7/net'
+
+class EchoServer < Alo7::Net::Server
+  def receive_data(data)
+    send_data data
+  end
+end
+
+Alo7::Net.run do
+  EchoServer.listen 3000
+end
+```
+
+### Client
+
+```ruby
+require 'alo7/net'
+
+class EchoClient < Alo7::Net::Client
+  def receive_data(data)
+    puts data
+  end
+end
+
+Alo7::Net.run do
+  c = EchoClient.connect 'localhost', 3000
+  c.send_data 'Hello World!'
+end
 ```
 
 ## Development
