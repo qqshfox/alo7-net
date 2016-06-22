@@ -1,0 +1,41 @@
+before_script:
+  - ruby -v
+  - gem -v
+  - bundle -v
+  - bundle install --without development --path vendor/bundle
+
+cache:
+  paths:
+    - vendor/bundle
+
+stages:
+  - test
+
+.test: &test
+  stage: test
+  script:
+    - bundle exec rake test
+  variables:
+    COVERAGE: 'true'
+  tags:
+    - docker
+
+test:2.3:
+  <<: *test
+  image: ruby:2.3
+
+test:2.2:
+  <<: *test
+  image: ruby:2.2
+
+test:2.1:
+  <<: *test
+  image: ruby:2.1
+
+test:2.0:
+  <<: *test
+  image: ruby:2.0
+
+test:1.9:
+  <<: *test
+  image: ruby:1.9
