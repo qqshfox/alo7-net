@@ -8,9 +8,11 @@ group :development, :test do
   gem 'minitest', '~> 5.0'
   gem 'simplecov'
   gem 'rubocop', require: false
+  gem 'yard', require: false
 end
 
 group :development do
   gem 'guard'
   gem 'guard-minitest'
+  gem 'guard-yard'
 end
