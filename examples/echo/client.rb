@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'alo7/net'
+require 'alo7-net'
 
 class EchoClient < Alo7::Net::Client
   def receive_data(data)

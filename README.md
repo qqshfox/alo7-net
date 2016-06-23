@@ -23,7 +23,7 @@ Or install it yourself as:
 ### Server
 
 ```ruby
-require 'alo7/net'
+require 'alo7-net'
 
 class EchoServer < Alo7::Net::Server
   def receive_data(data)
@@ -39,7 +39,7 @@ end
 ### Client
 
 ```ruby
-require 'alo7/net'
+require 'alo7-net'
 
 class EchoClient < Alo7::Net::Client
   def receive_data(data)
