@@ -11,6 +11,7 @@ cache:
 
 stages:
   - test
+  - doc
 
 .test: &test
   stage: test
@@ -40,3 +41,17 @@ test:2.0:
 test:1.9:
   <<: *test
   image: ruby:1.9
+
+pages:
+  image: ruby
+  stage: doc
+  script:
+    - bundle exec rake yard
+    - mv doc public
+  artifacts:
+    paths:
+      - public
+  tags:
+    - docker
+  only:
+    - master
