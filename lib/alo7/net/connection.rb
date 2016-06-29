@@ -5,21 +5,25 @@ require 'alo7/net/error'
 module Alo7
   module Net
     class Connection
+      module Callbacks
+        def post_init
+        end
+
+        def connection_completed
+        end
+
+        def receive_data(data)
+        end
+
+        def unbind
+        end
+      end
+
+      include Callbacks
+
       attr_accessor :impl
 
       def initialize(*args)
-      end
-
-      def post_init
-      end
-
-      def connection_completed
-      end
-
-      def receive_data(data)
-      end
-
-      def unbind
       end
 
       def send_data(data)
