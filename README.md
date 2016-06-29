@@ -1,4 +1,4 @@
-# alo7-net [![Build Status](https://travis-ci.org/qqshfox/alo7-net.svg)](https://travis-ci.org/qqshfox/alo7-net) [![Coverage Status](https://coveralls.io/repos/github/qqshfox/alo7-net/badge.svg)](https://coveralls.io/github/qqshfox/alo7-net)
+# alo7-net [![Build Status](https://travis-ci.org/qqshfox/alo7-net.svg)](https://travis-ci.org/qqshfox/alo7-net) [![Coverage Status](https://coveralls.io/repos/github/qqshfox/alo7-net/badge.svg)](https://coveralls.io/github/qqshfox/alo7-net) [![Code Climate](https://codeclimate.com/github/qqshfox/alo7-net/badges/gpa.svg)](https://codeclimate.com/github/qqshfox/alo7-net) [![Dependency Status](https://gemnasium.com/badges/github.com/qqshfox/alo7-net.svg)](https://gemnasium.com/github.com/qqshfox/alo7-net)
 
 alo7-net is the TCP server/client library we developed specifically for our ALO7 Learning Platform. This library provides a way to write asynchronous code in a straight-line fashion using fibers.
 
