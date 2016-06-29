@@ -7,6 +7,7 @@ group :development, :test do
   gem 'rake', '~> 10.0'
   gem 'minitest', '~> 5.0'
   gem 'simplecov'
+  gem 'coveralls', require: false
   gem 'rubocop', require: false
   gem 'yard', require: false
 end
