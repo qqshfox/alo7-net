@@ -23,7 +23,10 @@ module Alo7
       # @param host [String] host to connect to
       # @param port [Integer] port to connect to
       # @return [self]
+      #
+      # @raise if another {#reconnect} is under progress
       def reconnect(host, port)
+        raise AnotherReconnectingUnderProgress.new 'another reconnecting is under progress' if impl.connect_defer
         Net.reconnect self, host, port
         self.class.await_connect self
       end

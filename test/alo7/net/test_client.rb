@@ -115,6 +115,34 @@ module Alo7
         end
       end
 
+      def test_that_it_should_should_raise_when_another_reconnecting_is_under_progress
+        Net.run do
+          first_connection_completed = true
+          first_unbind = true
+          start_server EM::Connection
+          (Class.new(Client) do
+            include OnConnectionCompleted
+            include OnUnbind
+          end).connect('localhost', 9999, on_connection_completed_proc: proc do |connection|
+            first, first_connection_completed = first_connection_completed, false
+            connection.disconnect if first
+          end, on_unbind_proc: proc do |connection|
+            first, first_unbind = first_unbind, false
+            if first
+              Net.fiber_block { connection.reconnect 'localhost', 19999 }
+              assert_raises AnotherReconnectingUnderProgress do
+                Net.fiber_block { connection.reconnect 'localhost', 19999 }
+              end
+              Net.stop
+            end
+          end)
+          EM.add_timer 1 do
+            assert false
+            Net.stop
+          end
+        end
+      end
+
       def test_that_it_should_call_connection_completed_after_connect
         Net.run do
           start_server EM::Connection

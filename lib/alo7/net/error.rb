@@ -6,5 +6,8 @@ module Alo7
 
     # A error used to indicate a connection lost.
     class ConnectionLost < Error; end
+
+    # A error used to indicate another reconnecting is under progress.
+    class AnotherReconnectingUnderProgress < Error; end
   end
 end
