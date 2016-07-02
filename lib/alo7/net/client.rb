@@ -28,17 +28,23 @@ module Alo7
         self.class.await_connect self
       end
 
+      # @private
+      class Impl < Connection::Impl
+        attr_accessor :connect_defer
+
+        def connection_completed
+          connect_defer, @connect_defer = @connect_defer, nil
+          connect_defer.succeed
+          super
+        end
+      end
+
       class << self
         # @private
         def await_connect(connection)
           defer = Defer.new
-          connection.define_singleton_method :connection_completed do
-            defer.succeed
-          end
+          connection.impl.connect_defer = defer
           Net.await defer
-          connection.singleton_class.instance_eval do
-            remove_method :connection_completed
-          end
           connection
         end
       end

@@ -114,6 +114,22 @@ module Alo7
           end
         end
       end
+
+      def test_that_it_should_call_connection_completed_after_connect
+        Net.run do
+          start_server EM::Connection
+          (Class.new(Client) do
+            include OnConnectionCompleted
+          end).connect('localhost', 9999, on_connection_completed_proc: proc do
+            assert true
+            Net.stop
+          end)
+          EM.add_timer 1 do
+            assert false
+            Net.stop
+          end
+        end
+      end
     end
   end
 end
